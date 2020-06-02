@@ -12,11 +12,13 @@ iT = {
   hide: function(){
     var padOuter = $('iframe[name="ace_outer"]').contents().find("body");
     var inlineToolbar = padOuter.find("#inline_toolbar");
+    $(inlineToolbar).removeClass('popup-show');
     $(inlineToolbar).hide();
   },
   show: function(selStart, selEnd){
     var padOuter = $('iframe[name="ace_outer"]').contents().find("body");
     var inlineToolbar = padOuter.find("#inline_toolbar");
+    $(inlineToolbar).addClass('popup-show');
     $(inlineToolbar).show();
     var XY = getXYOffsetOfRep(selStart, selEnd);
     this.draw(XY);
@@ -35,10 +37,6 @@ exports.aceSelectionChanged = function(hook, context){
     iT.hide();
   }
 }
-
-exports.aceEditorCSS = function(hook, context){
-}
-
 
 
 var cloneLine = function (line) {
@@ -77,7 +75,7 @@ function getXYOffsetOfRep(selStart, selEnd){
   // Get the target Line
   var startLine = getLineAtIndex(selStart[0]);
   var endLine = getLineAtIndex(selEnd[0]);
-  var leftOffset = $(padInner)[0].offsetLeft + $('iframe[name="ace_outer"]')[0].offsetLeft;
+  var leftOffset = $(padInner)[0].offsetLeft + $('iframe[name="ace_outer"]')[0].offsetLeft + parseInt(padInner.css('padding-left'));
   if($(padInner)[0]){
     leftOffset = leftOffset +3; // it appears on apple devices this might not be set properly?
   }
@@ -109,7 +107,7 @@ function getXYOffsetOfRep(selStart, selEnd){
   lineText.splice(endIndex, 0, '</span>');
   lineText.splice(startIndex, 0, '<span id="selectWorker">');
   lineText = lineText.join('');
-  var toolbarMargin = parseInt(padOuter.find("#inline_toolbar").children().css('marginLeft'));
+  var toolbarMargin = parseInt(padOuter.find("#inline_toolbar").children().css('margin-left'));
   var heading = isHeading(lineIndex);
   if (heading) {
     lineText = '<' + heading + '>' + lineText + '</' + heading + '>';
@@ -120,7 +118,7 @@ function getXYOffsetOfRep(selStart, selEnd){
   if ( $(startLine.lineNode).length !== 0 ) {
 
     var worker =  $(clone).find('#selectWorker');
-    var top = worker.offset().top + padInner.offset().top; // A standard generic offset'
+    var top = worker.offset().top + padInner.offset().top + parseInt(padInner.css('padding-top')); // A standard generic offset'
     var left = (worker.offset().left || 0) + leftOffset + toolbarMargin + $(worker).width()/2 - padOuter.find("#inline_toolbar").width()/2;
 
     //adjust position
@@ -236,3 +234,7 @@ exports.postToolbarInit = function (hook, context) {
     });
   }
 }
+
+exports.aceEditorCSS = function () {
+  return ["ep_inline_toolbar/static/css/inline-toolbar.css"];
+};
