@@ -20,6 +20,7 @@ iT = {
     var inlineToolbar = padOuter.find("#inline_toolbar");
     $(inlineToolbar).addClass('popup-show');
     $(inlineToolbar).show();
+    html10n.translateElement(html10n.translations, inlineToolbar.get(0));
     var XY = getXYOffsetOfRep(selStart, selEnd);
     this.draw(XY);
   },

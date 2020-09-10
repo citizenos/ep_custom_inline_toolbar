@@ -20,7 +20,7 @@ exports.clientVars = function(hook, context, callback)
 var createInlineToolbar = function () {
   var toolbar = this.toolbar;
   if (toolbar) {
-      
+
     var availableButtons = toolbar.availableButtons;
 
     inlineButtons = [];
@@ -51,7 +51,7 @@ var createInlineToolbar = function () {
                     buttonTitle = localizationId;
                   }
                   buttonItem = toolbar.button(buttonItem);
-                  
+
                   var buttonHtml = buttonItem.render();
 
                   if (buttonType === 'link') {
@@ -63,7 +63,7 @@ var createInlineToolbar = function () {
                   }
 
                   buttons.push(buttonHtml);
-              }   
+              }
             });
 
           inlineButtons.push(buttons);
