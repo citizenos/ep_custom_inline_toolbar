@@ -1,3 +1,5 @@
-# Inline toolbar for Etherpad
+# Custom inline toolbar for Etherpad
 
-A simple way to add the toolbar buttons inline on the editor.  These buttons only appear when you highlight text
+Originally based on https://github.com/ether/ep_inline_toolbar but transformed into something different.
+
+## TODO: Describe what it does and how it is to be used!

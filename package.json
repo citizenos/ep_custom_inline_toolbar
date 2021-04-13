@@ -1,17 +1,17 @@
 {
-  "description": "Adds inline toolbar support to a Pad",
-  "name": "ep_inline_toolbar",
-  "version": "0.0.2",
+  "description": "Adds custom inline toolbar support to a Pad",
+  "name": "ep_custom_inline_toolbar",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/citizenos/ep_custom_inline_toolbar"
+  },
   "author": {
     "name": "John McLear",
     "email": "john@mclear.co.uk"
   },
   "engines": {
     "node": ">6.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/JohnMcLear/ep_inline_toolbar"
   },
   "devDependencies": {
     "eslint": "^7.14.0",
