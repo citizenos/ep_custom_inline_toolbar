@@ -42,8 +42,8 @@ let isHeading = function (index) {
 // Given a rep we get the X and Y px offset
 const getXYOffsetOfRep = (selStart, selEnd) => {
   let viewPosition = 'bottom';
-  if (clientVars.ep_inline_toolbar && clientVars.ep_inline_toolbar.position) {
-    viewPosition = clientVars.ep_inline_toolbar.position;
+  if (clientVars.ep_custom_inline_toolbar && clientVars.ep_custom_inline_toolbar.position) {
+    viewPosition = clientVars.ep_custom_inline_toolbar.position;
   }
   let clone;
   let startIndex = 0;
@@ -96,7 +96,7 @@ const getXYOffsetOfRep = (selStart, selEnd) => {
   lineText.splice(endIndex, 0, '</span>');
   lineText.splice(startIndex, 0, '<span id="selectWorker">');
   lineText = lineText.join('');
-  const toolbarMargin = parseInt(padOuter.find('#inline_toolbar').children().css('margin-left'));
+  const toolbarMargin = parseInt(padOuter.find('#custom_inline_toolbar').children().css('margin-left'));
   const heading = isHeading(lineIndex);
   if (heading) {
     lineText = `<${heading}>${lineText}</${heading}>`;
@@ -110,14 +110,14 @@ const getXYOffsetOfRep = (selStart, selEnd) => {
     const innerOffset = padInner.offset();
     const innerPaddingTop = parseInt(padInner.css('padding-top'));
     const wWidth = $(worker).width();
-    const itbwidth = padOuter.find('#inline_toolbar').width();
+    const itbwidth = padOuter.find('#custom_inline_toolbar').width();
 
     let top = workerOffset.top + innerOffset.top + innerPaddingTop; // A standard generic offset'
     let left = (workerOffset.left || 0) + leftOffset + toolbarMargin + wWidth / 2 - itbwidth / 2;
 
     // adjust position
     if (viewPosition === 'top') {
-      top -= padOuter.find('#inline_toolbar')[0].offsetHeight;
+      top -= padOuter.find('#custom_inline_toolbar')[0].offsetHeight;
       if (top <= 0) { // If the tooltip wont be visible to the user because it's too high up
         top += worker[0].offsetHeight;
         if (top < 0) { top = 0; } // handle case where caret is in 0,0
@@ -139,15 +139,15 @@ const getXYOffsetOfRep = (selStart, selEnd) => {
       top += (worker[0].offsetHeight / 2);
     }
 
-    padOuter.find('#inline_toolbar').find('.menu_inline').removeClass('arrow_left');
-    padOuter.find('#inline_toolbar').find('.menu_inline').removeClass('arrow_right');
+    padOuter.find('#custom_inline_toolbar').find('.menu_inline').removeClass('arrow_left');
+    padOuter.find('#custom_inline_toolbar').find('.menu_inline').removeClass('arrow_right');
     if (left < 0) {
       left = 0;
-      padOuter.find('#inline_toolbar').find('.menu_inline').addClass('arrow_left');
+      padOuter.find('#custom_inline_toolbar').find('.menu_inline').addClass('arrow_left');
     }
-    if (left > padInner.width() - padOuter.find('#inline_toolbar')[0].offsetWidth) {
-      left = padInner.width() - padOuter.find('#inline_toolbar')[0].offsetWidth;
-      padOuter.find('#inline_toolbar').find('.menu_inline').addClass('arrow_right');
+    if (left > padInner.width() - padOuter.find('#custom_inline_toolbar')[0].offsetWidth) {
+      left = padInner.width() - padOuter.find('#custom_inline_toolbar')[0].offsetWidth;
+      padOuter.find('#custom_inline_toolbar').find('.menu_inline').addClass('arrow_right');
     }
 
     // Remove the clone element
@@ -159,7 +159,7 @@ const getXYOffsetOfRep = (selStart, selEnd) => {
 // Draws the toolbar onto the screen
 const drawAt = (XY) => {
   const padOuter = $('iframe[name="ace_outer"]').contents().find('body');
-  const toolbar = padOuter.find('#inline_toolbar');
+  const toolbar = padOuter.find('#custom_inline_toolbar');
 
   toolbar.show();
   toolbar.css({
@@ -172,14 +172,14 @@ const drawAt = (XY) => {
 const iT = {
   hide() {
     const padOuter = $('iframe[name="ace_outer"]').contents().find('body');
-    const inlineToolbar = padOuter.find('#inline_toolbar');
+    const inlineToolbar = padOuter.find('#custom_inline_toolbar');
     if (!inlineToolbar.length) return;
     $(inlineToolbar).removeClass('popup-show');
     $(inlineToolbar).hide();
   },
   show(selStart, selEnd) {
     const padOuter = $('iframe[name="ace_outer"]').contents().find('body');
-    const inlineToolbar = padOuter.find('#inline_toolbar');
+    const inlineToolbar = padOuter.find('#custom_inline_toolbar');
     if (!inlineToolbar.length) return;
     $(inlineToolbar).addClass('popup-show');
     $(inlineToolbar).show();
@@ -211,7 +211,7 @@ exports.postAceInit = function () {
     iT.hide();
   });
 
-  $('#inline_toolbar [data-key]').each(function () {
+  $('#custom_inline_toolbar [data-key]').each(function () {
     $(this).unbind('click');
     const command = $(this).data('key');
 
@@ -228,7 +228,7 @@ exports.postAceInit = function () {
     });
   });
 
-  $('#inline_toolbar').detach().appendTo(padOuter[0]);
+  $('#custom_inline_toolbar').detach().appendTo(padOuter[0]);
 };
 
 exports.aceInitialized = (hook, context) => {
@@ -239,9 +239,9 @@ exports.aceInitialized = (hook, context) => {
 exports.postToolbarInit = () => {
   if (clientVars.inlineButtons && clientVars.inlineButtons.length) {
     $.each(clientVars.inlineButtons, (key, item) => {
-      $('#inline_toolbar_menu_items').append(item);
+      $('#custom_inline_toolbar_menu_items').append(item);
     });
   }
 };
 
-exports.aceEditorCSS = () => ['ep_inline_toolbar/static/css/inline-toolbar.css'];
+exports.aceEditorCSS = () => ['ep_custom_inline_toolbar/static/css/inline-toolbar.css'];

@@ -1,8 +1,8 @@
-#inline_toolbar {
+#custom_inline_toolbar {
     max-width: max-content;
     padding: 10px;
 }
 
-#inline_toolbar_menu_items{
+#custom_inline_toolbar_menu_items{
     display: block;
 }
