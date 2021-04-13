@@ -5,19 +5,19 @@
       "post": ["ep_etherpad-lite/static"],
       "pre": ["ep_*"],
       "client_hooks": {
-        "postAceInit": "custom_inline_toolbar/static/js/index",
-        "aceEditorCSS": "custom_inline_toolbar/static/js/index",
-        "aceSelectionChanged": "custom_inline_toolbar/static/js/index",
-        "aceInitialized": "custom_inline_toolbar/static/js/index",
-        "postToolbarInit": "custom_inline_toolbar/static/js/index"
+        "postAceInit": "ep_custom_inline_toolbar/static/js/index",
+        "aceEditorCSS": "ep_custom_inline_toolbar/static/js/index",
+        "aceSelectionChanged": "ep_custom_inline_toolbar/static/js/index",
+        "aceInitialized": "ep_custom_inline_toolbar/static/js/index",
+        "postToolbarInit": "ep_custom_inline_toolbar/static/js/index"
       },
       "hooks": {
-        "loadSettings": "custom_inline_toolbar/index",
-        "eejsBlock_body": "custom_inline_toolbar/index",
-        "eejsBlock_mySettings": "custom_inline_toolbar/index",
-        "eejsBlock_styles": "custom_inline_toolbar/index",
-        "padInitToolbar": "custom_inline_toolbar/index",
-        "clientVars": "custom_inline_toolbar/index"
+        "loadSettings": "ep_custom_inline_toolbar/index",
+        "eejsBlock_body": "ep_custom_inline_toolbar/index",
+        "eejsBlock_mySettings": "ep_custom_inline_toolbar/index",
+        "eejsBlock_styles": "ep_custom_inline_toolbar/index",
+        "padInitToolbar": "ep_custom_inline_toolbar/index",
+        "clientVars": "ep_custom_inline_toolbar/index"
       }
     }
   ]
