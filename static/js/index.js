@@ -177,7 +177,7 @@ const iT = {
     $(inlineToolbar).removeClass('popup-show');
     $(inlineToolbar).hide();
   },
-  show: (selStart, selEnd) => {
+  show(selStart, selEnd) {
     const padOuter = $('iframe[name="ace_outer"]').contents().find('body');
     const inlineToolbar = padOuter.find('#custom_inline_toolbar');
     if (!inlineToolbar.length) return;
