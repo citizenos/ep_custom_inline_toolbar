@@ -1,7 +1,7 @@
 {
   "description": "Adds custom inline toolbar support to a Pad",
   "name": "ep_custom_inline_toolbar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/citizenos/ep_custom_inline_toolbar"
