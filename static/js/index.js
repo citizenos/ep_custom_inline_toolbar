@@ -64,7 +64,7 @@ const getXYOffsetOfRep = (selStart, selEnd) => {
   const startLine = getLineAtIndex(selStart[0]);
   const endLine = getLineAtIndex(selEnd[0]);
   const innerPadding = parseInt(padInner.css('padding-left'));
-  let leftOffset = $(padInner)[0].offsetLeft + $('iframe[name="ace_outer"]')[0].offsetLeft + innerPadding;
+  let leftOffset = $(padInner)[0].offsetLeft + $('iframe[name="ace_outer"]')[0].offsetLeft + innerPadding; // eslint-disable-line max-len
   if ($(padInner)[0]) {
     leftOffset += 3; // it appears on apple devices this might not be set properly?
   }
@@ -96,7 +96,7 @@ const getXYOffsetOfRep = (selStart, selEnd) => {
   lineText.splice(endIndex, 0, '</span>');
   lineText.splice(startIndex, 0, '<span id="selectWorker">');
   lineText = lineText.join('');
-  const toolbarMargin = parseInt(padOuter.find('#custom_inline_toolbar').children().css('margin-left'));
+  const toolbarMargin = parseInt(padOuter.find('#custom_inline_toolbar').children().css('margin-left')); // eslint-disable-line max-len
   const heading = isHeading(lineIndex);
   if (heading) {
     lineText = `<${heading}>${lineText}</${heading}>`;
@@ -170,14 +170,14 @@ const drawAt = (XY) => {
 };
 
 const iT = {
-  hide() {
+  hide: () => {
     const padOuter = $('iframe[name="ace_outer"]').contents().find('body');
     const inlineToolbar = padOuter.find('#custom_inline_toolbar');
     if (!inlineToolbar.length) return;
     $(inlineToolbar).removeClass('popup-show');
     $(inlineToolbar).hide();
   },
-  show(selStart, selEnd) {
+  show: (selStart, selEnd) => {
     const padOuter = $('iframe[name="ace_outer"]').contents().find('body');
     const inlineToolbar = padOuter.find('#custom_inline_toolbar');
     if (!inlineToolbar.length) return;
@@ -187,7 +187,7 @@ const iT = {
     const XY = getXYOffsetOfRep(selStart, selEnd);
     this.draw(XY);
   },
-  draw(XY) {
+  draw: (XY) => {
     drawAt(XY);
   },
 };
@@ -203,7 +203,7 @@ exports.aceSelectionChanged = (hook, context) => {
   }
 };
 
-exports.postAceInit = function () {
+exports.postAceInit = () => {
   iT.hide();
 
   const padOuter = $('iframe[name="ace_outer"]').contents().find('body');
@@ -232,8 +232,8 @@ exports.postAceInit = function () {
 };
 
 exports.aceInitialized = (hook, context) => {
-  getLineAtIndex = _(getLineAtIndex).bind(context);
-  isHeading = _(isHeading).bind(context);
+  getLineAtIndex = getLineAtIndex.bind(context);
+  isHeading = isHeading.bind(context);
 };
 
 exports.postToolbarInit = () => {

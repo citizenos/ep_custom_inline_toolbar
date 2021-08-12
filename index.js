@@ -13,7 +13,7 @@ let createInlineToolbar = function () {
     const availableButtons = toolbar.availableButtons;
     inlineButtons = [];
     inlineMenuItems.forEach((inlineBlock) => {
-      if (_.isArray(inlineBlock)) {
+      if (Array.isArray(inlineBlock)) {
         const buttons = [];
         inlineBlock.forEach((buttonName) => {
           let buttonType = null;
@@ -76,7 +76,7 @@ exports.clientVars = async (hook, context) => {
 };
 
 exports.padInitToolbar = (hookName, context) => {
-  createInlineToolbar = _(createInlineToolbar).bind(context);
+  createInlineToolbar = createInlineToolbar.bind(context);
 };
 
 
