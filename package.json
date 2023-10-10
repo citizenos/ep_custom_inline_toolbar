@@ -11,24 +11,23 @@
     "email": "john@mclear.co.uk"
   },
   "engines": {
-    "node": ">12.0.0"
+    "node": ">16.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.14.0",
-    "eslint-config-etherpad": "^2.0.0",
-    "eslint-plugin-mocha": "^9.0.0",
+    "eslint": "^8.51.0",
+    "eslint-config-etherpad": "^3.0.22",
+    "eslint-plugin-mocha": "^10.2.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-prefer-arrow": "^1.2.2",
-    "eslint-plugin-promise": "^5.1.0",
-    "eslint-plugin-you-dont-need-lodash-underscore": "^6.12.0"
+    "eslint-plugin-promise": "^6.1.1"
   },
   "eslintConfig": {
     "root": true,
     "extends": "etherpad/plugin"
   },
   "peerDependencies": {
-    "ep_etherpad-lite": ">=1.8.6"
+    "ep_etherpad-lite": ">=1.8.14"
   },
   "scripts": {
     "lint": "eslint ."
